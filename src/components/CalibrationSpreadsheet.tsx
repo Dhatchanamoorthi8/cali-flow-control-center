@@ -68,21 +68,7 @@ export const CalibrationSpreadsheet: React.FC<CalibrationSpreadsheetProps> = ({
     width: '100%',
     licenseKey: 'non-commercial-and-evaluation',
     stretchH: 'all',
-    contextMenu: [
-      'row_above',
-      'row_below',
-      'col_left', 
-      'col_right',
-      'remove_row',
-      'remove_col',
-      '---------',
-      'mergeCells',
-      'unMergeCells',
-      '---------',
-      'copy',
-      'cut',
-      'paste'
-    ],
+    contextMenu: true,
     mergeCells: [
       { row: 8, col: 0, rowspan: 1, colspan: 2 },
       { row: 9, col: 0, rowspan: 1, colspan: 2 },
