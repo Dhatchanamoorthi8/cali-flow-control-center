@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useCallback } from 'react';
 import { HotTable } from '@handsontable/react';
 import { HyperFormula } from 'hyperformula';
@@ -69,23 +68,21 @@ export const CalibrationSpreadsheet: React.FC<CalibrationSpreadsheetProps> = ({
     width: '100%',
     licenseKey: 'non-commercial-and-evaluation',
     stretchH: 'all',
-    contextMenu: {
-      items: {
-        'row_above': { name: 'Insert row above' },
-        'row_below': { name: 'Insert row below' },
-        'col_left': { name: 'Insert column left' },
-        'col_right': { name: 'Insert column right' },
-        'remove_row': { name: 'Remove row' },
-        'remove_col': { name: 'Remove column' },
-        'separator1': '---------',
-        'mergeCells': { name: 'Merge cells' },
-        'unMergeCells': { name: 'Unmerge cells' },
-        'separator2': '---------',
-        'copy': { name: 'Copy' },
-        'cut': { name: 'Cut' },
-        'paste': { name: 'Paste' }
-      }
-    },
+    contextMenu: [
+      'row_above',
+      'row_below',
+      'col_left', 
+      'col_right',
+      'remove_row',
+      'remove_col',
+      '---------',
+      'mergeCells',
+      'unMergeCells',
+      '---------',
+      'copy',
+      'cut',
+      'paste'
+    ],
     mergeCells: [
       { row: 8, col: 0, rowspan: 1, colspan: 2 },
       { row: 9, col: 0, rowspan: 1, colspan: 2 },
