@@ -67,7 +67,7 @@ export const CalibrationSpreadsheet: React.FC<CalibrationSpreadsheetProps> = ({
     height: 'auto',
     width: '100%',
     licenseKey: 'non-commercial-and-evaluation',
-    stretchH: 'all',
+    stretchH: 'all' as const,
     contextMenu: true,
     mergeCells: [
       { row: 8, col: 0, rowspan: 1, colspan: 2 },
