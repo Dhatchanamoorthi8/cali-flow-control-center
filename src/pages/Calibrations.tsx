@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -19,10 +18,13 @@ import {
   Edit,
   FileText,
   Thermometer,
-  Droplets
+  Droplets,
+  FileSpreadsheet
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Calibrations = () => {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
 
@@ -124,130 +126,10 @@ const Calibrations = () => {
             <FileText className="w-4 h-4 mr-2" />
             Bulk Import
           </Button>
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button>
-                <Plus className="w-4 h-4 mr-2" />
-                New Calibration
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
-              <DialogHeader>
-                <DialogTitle>Record Calibration Results</DialogTitle>
-              </DialogHeader>
-              <div className="grid grid-cols-2 gap-6 py-4">
-                {/* Device Information */}
-                <div className="space-y-4">
-                  <h3 className="text-lg font-medium">Device Information</h3>
-                  <div className="space-y-3">
-                    <div>
-                      <Label htmlFor="device">Device</Label>
-                      <Select>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select device" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="dmm100">Digital Multimeter DMM-100</SelectItem>
-                          <SelectItem value="pg250">Pressure Gauge PG-250</SelectItem>
-                          <SelectItem value="ts500">Temperature Sensor TS-500</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div>
-                      <Label htmlFor="technician">Assigned Technician</Label>
-                      <Select>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select technician" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="john">John Smith</SelectItem>
-                          <SelectItem value="sarah">Sarah Wilson</SelectItem>
-                          <SelectItem value="mike">Mike Johnson</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div>
-                      <Label htmlFor="standard">Calibration Standard Used</Label>
-                      <Input id="standard" placeholder="Fluke 5522A" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Environmental Conditions */}
-                <div className="space-y-4">
-                  <h3 className="text-lg font-medium">Environmental Conditions</h3>
-                  <div className="space-y-3">
-                    <div className="grid grid-cols-2 gap-3">
-                      <div>
-                        <Label htmlFor="temperature">Temperature</Label>
-                        <div className="relative">
-                          <Input id="temperature" placeholder="23.2" />
-                          <Thermometer className="w-4 h-4 absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                        </div>
-                      </div>
-                      <div>
-                        <Label htmlFor="humidity">Humidity</Label>
-                        <div className="relative">
-                          <Input id="humidity" placeholder="45" />
-                          <Droplets className="w-4 h-4 absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <Label htmlFor="pressure">Atmospheric Pressure (optional)</Label>
-                      <Input id="pressure" placeholder="1013.25 hPa" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Calibration Results */}
-                <div className="col-span-2 space-y-4">
-                  <h3 className="text-lg font-medium">Calibration Results</h3>
-                  <div className="grid grid-cols-3 gap-4">
-                    <div>
-                      <Label htmlFor="beforeValues">Before Calibration</Label>
-                      <Input id="beforeValues" placeholder="999.8V" />
-                    </div>
-                    <div>
-                      <Label htmlFor="afterValues">After Calibration</Label>
-                      <Input id="afterValues" placeholder="1000.0V" />
-                    </div>
-                    <div>
-                      <Label htmlFor="uncertainty">Uncertainty</Label>
-                      <Input id="uncertainty" placeholder="±0.05%" />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="result">Pass/Fail Status</Label>
-                      <Select>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select result" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="pass">Pass</SelectItem>
-                          <SelectItem value="fail">Fail</SelectItem>
-                          <SelectItem value="limited">Limited Pass</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div>
-                      <Label htmlFor="nextDue">Next Calibration Due</Label>
-                      <Input id="nextDue" type="date" />
-                    </div>
-                  </div>
-                  <div>
-                    <Label htmlFor="comments">Comments/Observations</Label>
-                    <Textarea id="comments" placeholder="Additional notes about the calibration..." rows={3} />
-                  </div>
-                </div>
-              </div>
-              <div className="flex justify-end space-x-2">
-                <Button variant="outline">Save Draft</Button>
-                <Button>Complete Calibration</Button>
-              </div>
-            </DialogContent>
-          </Dialog>
+          <Button onClick={() => navigate('/calibration-entry')}>
+            <FileSpreadsheet className="w-4 h-4 mr-2" />
+            New Calibration Entry
+          </Button>
         </div>
       </div>
 
@@ -340,9 +222,14 @@ const Calibrations = () => {
               )}
 
               <div className="flex space-x-2">
-                <Button variant="outline" size="sm" className="flex-1">
-                  <Edit className="w-4 h-4 mr-2" />
-                  Edit
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="flex-1"
+                  onClick={() => navigate('/calibration-entry')}
+                >
+                  <FileSpreadsheet className="w-4 h-4 mr-2" />
+                  Data Entry
                 </Button>
                 <Button variant="outline" size="sm" className="flex-1">
                   <FileText className="w-4 h-4 mr-2" />

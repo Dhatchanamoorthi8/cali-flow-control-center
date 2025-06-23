@@ -1,6 +1,5 @@
 
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -9,6 +8,7 @@ import Index from "./pages/Index";
 import Devices from "./pages/Devices";
 import Clients from "./pages/Clients";
 import Calibrations from "./pages/Calibrations";
+import CalibrationEntry from "./pages/CalibrationEntry";
 import Certificates from "./pages/Certificates";
 import Reports from "./pages/Reports";
 import Users from "./pages/Users";
@@ -21,7 +21,6 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
-      <Sonner />
       <BrowserRouter>
         <Layout>
           <Routes>
@@ -29,6 +28,7 @@ const App = () => (
             <Route path="/devices" element={<Devices />} />
             <Route path="/clients" element={<Clients />} />
             <Route path="/calibrations" element={<Calibrations />} />
+            <Route path="/calibration-entry" element={<CalibrationEntry />} />
             <Route path="/certificates" element={<Certificates />} />
             <Route path="/reports" element={<Reports />} />
             <Route path="/users" element={<Users />} />
