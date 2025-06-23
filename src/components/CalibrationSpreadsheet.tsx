@@ -1,6 +1,7 @@
 import React, { useRef, useState, useCallback } from 'react';
 import { HotTable } from '@handsontable/react';
 import { HyperFormula } from 'hyperformula';
+import { registerCellType, NumericCellType } from 'handsontable/cellTypes';
 import 'handsontable/dist/handsontable.full.min.css';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -17,6 +18,9 @@ import {
   Settings,
   FileSpreadsheet
 } from 'lucide-react';
+
+// Register the numeric cell type
+registerCellType('numeric', NumericCellType);
 
 interface CalibrationSpreadsheetProps {
   deviceId?: string;
