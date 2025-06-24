@@ -9,7 +9,254 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      calibrations: {
+        Row: {
+          calibration_standard: string | null
+          certificate_generated: boolean | null
+          client_id: string | null
+          comments: string | null
+          completed_date: string | null
+          created_at: string
+          device_id: string | null
+          humidity: number | null
+          id: string
+          measurement_data: Json | null
+          pressure: number | null
+          scheduled_date: string
+          status: Database["public"]["Enums"]["calibration_status"] | null
+          technician_id: string | null
+          temperature: number | null
+          updated_at: string
+        }
+        Insert: {
+          calibration_standard?: string | null
+          certificate_generated?: boolean | null
+          client_id?: string | null
+          comments?: string | null
+          completed_date?: string | null
+          created_at?: string
+          device_id?: string | null
+          humidity?: number | null
+          id?: string
+          measurement_data?: Json | null
+          pressure?: number | null
+          scheduled_date: string
+          status?: Database["public"]["Enums"]["calibration_status"] | null
+          technician_id?: string | null
+          temperature?: number | null
+          updated_at?: string
+        }
+        Update: {
+          calibration_standard?: string | null
+          certificate_generated?: boolean | null
+          client_id?: string | null
+          comments?: string | null
+          completed_date?: string | null
+          created_at?: string
+          device_id?: string | null
+          humidity?: number | null
+          id?: string
+          measurement_data?: Json | null
+          pressure?: number | null
+          scheduled_date?: string
+          status?: Database["public"]["Enums"]["calibration_status"] | null
+          technician_id?: string | null
+          temperature?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "calibrations_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "calibrations_device_id_fkey"
+            columns: ["device_id"]
+            isOneToOne: false
+            referencedRelation: "devices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "calibrations_technician_id_fkey"
+            columns: ["technician_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      certificates: {
+        Row: {
+          calibration_id: string | null
+          certificate_number: string
+          created_at: string
+          id: string
+          issued_date: string | null
+          pdf_url: string | null
+          valid_until: string | null
+        }
+        Insert: {
+          calibration_id?: string | null
+          certificate_number: string
+          created_at?: string
+          id?: string
+          issued_date?: string | null
+          pdf_url?: string | null
+          valid_until?: string | null
+        }
+        Update: {
+          calibration_id?: string | null
+          certificate_number?: string
+          created_at?: string
+          id?: string
+          issued_date?: string | null
+          pdf_url?: string | null
+          valid_until?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "certificates_calibration_id_fkey"
+            columns: ["calibration_id"]
+            isOneToOne: false
+            referencedRelation: "calibrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      clients: {
+        Row: {
+          address: string | null
+          contact_person: string | null
+          created_at: string
+          email: string | null
+          id: string
+          industry: string | null
+          name: string
+          phone: string | null
+          status: string | null
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          contact_person?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          industry?: string | null
+          name: string
+          phone?: string | null
+          status?: string | null
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          contact_person?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          industry?: string | null
+          name?: string
+          phone?: string | null
+          status?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      devices: {
+        Row: {
+          calibration_interval: number | null
+          client_id: string | null
+          created_at: string
+          device_type: string | null
+          id: string
+          last_calibration_date: string | null
+          location: string | null
+          manufacturer: string | null
+          model: string | null
+          name: string
+          next_calibration_date: string | null
+          notes: string | null
+          serial_number: string
+          status: Database["public"]["Enums"]["device_status"] | null
+          updated_at: string
+        }
+        Insert: {
+          calibration_interval?: number | null
+          client_id?: string | null
+          created_at?: string
+          device_type?: string | null
+          id?: string
+          last_calibration_date?: string | null
+          location?: string | null
+          manufacturer?: string | null
+          model?: string | null
+          name: string
+          next_calibration_date?: string | null
+          notes?: string | null
+          serial_number: string
+          status?: Database["public"]["Enums"]["device_status"] | null
+          updated_at?: string
+        }
+        Update: {
+          calibration_interval?: number | null
+          client_id?: string | null
+          created_at?: string
+          device_type?: string | null
+          id?: string
+          last_calibration_date?: string | null
+          location?: string | null
+          manufacturer?: string | null
+          model?: string | null
+          name?: string
+          next_calibration_date?: string | null
+          notes?: string | null
+          serial_number?: string
+          status?: Database["public"]["Enums"]["device_status"] | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "devices_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string
+          full_name: string | null
+          id: string
+          phone: string | null
+          role: Database["public"]["Enums"]["user_role"] | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          full_name?: string | null
+          id: string
+          phone?: string | null
+          role?: Database["public"]["Enums"]["user_role"] | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          role?: Database["public"]["Enums"]["user_role"] | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -18,7 +265,14 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      calibration_status:
+        | "scheduled"
+        | "in_progress"
+        | "completed"
+        | "overdue"
+        | "cancelled"
+      device_status: "active" | "inactive" | "maintenance" | "retired"
+      user_role: "admin" | "technician" | "client"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -133,6 +387,16 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      calibration_status: [
+        "scheduled",
+        "in_progress",
+        "completed",
+        "overdue",
+        "cancelled",
+      ],
+      device_status: ["active", "inactive", "maintenance", "retired"],
+      user_role: ["admin", "technician", "client"],
+    },
   },
 } as const
